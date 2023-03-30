@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-const Modal = ({ modalContent, closeModal }) => {
-  useEffect(() => {
+const Modal = ({ closeModal, modalContent }) => {
+  React.useEffect(() => {
     setTimeout(() => {
       closeModal();
     }, 3000);
