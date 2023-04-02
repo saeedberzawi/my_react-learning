@@ -38,7 +38,60 @@ const result = arr.map((item) => {
     return <span>{item}</span>;
   }
 });
+// ------ 5
+const data = [
+  {
+    id: 1,
+    name: "{المحتوى الأول}هناك المزيد",
+    title: "{المحتوى الثاني}هناك المزيد",
+    title2: "{المحتوى الثاني}مشايه ",
+    age: "النص العادي",
+  },
+  {
+    id: 2,
+    name: "{المحتوى الأول}",
+    title: "{المحتوى الثاني}",
+    title2: "{المحتوى الثاني}مشايه ",
+    age: "النص العادي",
+  },
+];
 
+const boldData = data.map((item, index) => {
+  return (
+    <div>
+      <h2>{item.title}</h2>
+      <p>
+        {item.name.split("{").map((text, i) => {
+          if (text.includes("}")) {
+            const boldText = text.split("}")[0];
+            return (
+              <span key={i}>
+                <span style={{ fontWeight: "bold" }}>{boldText}</span>
+                {text.split("}")[1]}
+              </span>
+            );
+          }
+          return text;
+        })}
+      </p>
+      <h3>
+        {item.title2.split("{").map((text, i) => {
+          if (text.includes("}")) {
+            const boldText = text.split("}")[0];
+            return (
+              <span key={i}>
+                <span style={{ fontWeight: "bold" }}>{boldText}</span>
+                {text.split("}")[1]}
+              </span>
+            );
+          }
+          return text;
+        })}
+      </h3>
+      <p>{item.age}</p>
+    </div>
+  );
+});
 const Training = () => {
   return (
     <>
@@ -66,6 +119,8 @@ const Training = () => {
       <div>{parts}</div>
       {/* ----- 4 */}
       <div>{result}</div>
+      {/* -------- 5 */}
+      <>{boldData}</>
     </>
   );
 };
