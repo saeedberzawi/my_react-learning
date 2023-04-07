@@ -6,12 +6,22 @@ import React, { useState } from "react";
 // value, onChange
 
 const ControlledInputs = () => {
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(firstName, email);
-  };
+  const[name,setName]=useState("")
+  const[email,setEmail]=useState("")
+  const[people,setPeople]=useState([])
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    if(name && email){
+      const newPerson = {id:new Date().getTime().toString(), name,email}
+      setPeople((person)=>{
+        return[...person,newPerson]
+      })
+      setEmail('')
+      setName('')
+    }else{
+      console.log("empty value");
+    }
+  }
   return (
     <>
       <article>
@@ -24,8 +34,8 @@ const ControlledInputs = () => {
               id="firstName"
               name="firstName"
               placeholder="your name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
             />
           </div>
           <div className="form-control">
@@ -36,13 +46,19 @@ const ControlledInputs = () => {
               name="email"
               placeholder="your E-mail"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
           <button type="submit" onClick={handleSubmit}>
             add person
           </button>
         </form>
+        {people.map((item)=>{
+          return <div key={item.id}>
+            <p>{item.name}</p>
+            <p>{item.email}</p>
+          </div>
+        })}
       </article>
     </>
   );
